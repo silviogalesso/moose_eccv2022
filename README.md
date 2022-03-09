@@ -1,8 +1,10 @@
-# Source code for "Probing Contextual Diversity for Dense Out-of-Distribution Detection"
+# Source code for ECCV2022 submission 3568
 This repository contains the evaluation code and some pre-trained models.
 
 ## How to use
-1. Clone the repository and move to its directory
+0. Install `torch`, `torchvision`, `sklearn` and `tqdm`. The repository was tested with PyTorch 1.9.
+
+1. Clone the repository and move to its directory.
 
 2. Create folders for datasets and model snapshots:
 `mkdir -p checkpoints datasets/street_hazards`
