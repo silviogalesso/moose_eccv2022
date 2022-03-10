@@ -20,7 +20,7 @@ Download and extract the desired dataset:
 ## Model Checkpoints
 Download the desired checkpoint and place it in the `checkpoints` folder:
 * StreetHazards: https://drive.google.com/file/d/1mdTDlOZTjWf1YAIHYiuUFCGKgC4N7KTC/view?usp=sharing
-* RoadAnomaly: https://drive.google.com/file/d/1O5FNijvCvqUybOweAnsHPTXkiAcTQmKa/view?usp=sharing
+* RoadAnomaly: https://drive.google.com/file/d/18NbxWfKnxpRsyB9CySGFB7-pXjLksy5y/view?usp=sharing
 
 ## Dataset Evlauation
 * StreetHazards: `python eval.py street_hazards checkpoints/StreetHazards_deeplabv3_resnet50.pth --arch deeplabv3_resnet50`
