@@ -63,8 +63,9 @@ def eval_ens_ood(model, loader):
                            "meter_moose": AverageValueMeter()}),
         ])) for score_fn in ood_score_functions.keys()])
     runtime_meter = AverageValueMeter()
-    # t = tqdm(total=len(loader.dataset)//loader.batch_size)
-    for img, segm in tqdm(loader):
+
+    t = tqdm(total=len(loader.dataset)//loader.batch_size)
+    for idx, (img, segm) in enumerate(loader):
         img = img.cuda()
         # prepare ground truth OoD segmentation
         ood_segm = (segm == loader.dataset.ood_indices[0])
@@ -83,20 +84,20 @@ def eval_ens_ood(model, loader):
 
         # main prediction
         for score_fn in ood_score_functions.keys():
-            unc = ood_score_functions[score_fn]["single"](pred)
+            ood_scores_global = ood_score_functions[score_fn]["single"](pred)
             for key, metric in metrics[score_fn].items():
-                val = metric["function"](unc.cpu(), ood_segm)
+                val = metric["function"](ood_scores_global.cpu(), ood_segm)
                 metric["meter"].add(val)
 
         # moose predictions
         for score_fn in ood_score_functions.keys():
-            unc_ens = ood_score_functions[score_fn]["ens"](all_preds)
+            ood_scores_moose = ood_score_functions[score_fn]["ens"](all_preds)
             for key, metric in metrics[score_fn].items():
-                val = metric["function"](unc_ens.cpu(), ood_segm)
+                val = metric["function"](ood_scores_moose.cpu(), ood_segm)
                 metric["meter_moose"].add(val)
 
-    #     t.update()
-    # t.close()
+        t.update()
+    t.close()
 
     print("\nAverage runtime = {:.05f}s".format(runtime_meter.mean))
     print("\nOoD detection results, {}:\n".format(args.dataset))
