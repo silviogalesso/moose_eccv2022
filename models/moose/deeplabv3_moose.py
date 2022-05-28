@@ -203,12 +203,12 @@ def deeplabv3_resnet50_moose(num_classes=21, atrous_rates=None, pretrained_backb
 
 
 def deeplabv3_resnet101_moose(num_classes=21, atrous_rates=None, pretrained_backbone=True,
-                              probes_stop_gradient=True, intermediate_heads_depth=1,
+                              probes_stop_gradient=True, probes_depth=1,
                               train_probes_only=False, residual_probes=False):
     model = _deeplabv3_resnet_multi_output("deeplabv3", "resnet101", num_classes, atrous_rates,
                                            pretrained_backbone=pretrained_backbone,
                                            probes_stop_gradient=probes_stop_gradient,
-                                           probes_depth=intermediate_heads_depth,
+                                           probes_depth=probes_depth,
                                            train_probes_only=train_probes_only)
     return model
 

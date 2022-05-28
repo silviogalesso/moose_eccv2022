@@ -23,6 +23,6 @@ Download the desired checkpoint and place it in the `checkpoints` folder:
 * RoadAnomaly: https://drive.google.com/file/d/18NbxWfKnxpRsyB9CySGFB7-pXjLksy5y/view?usp=sharing
 
 ## Dataset Evlauation
+Note: since the results reported in the paper are averages over multiple runs, the outcomes obtained with this code will differ slightly.  
 * StreetHazards: `python eval.py street_hazards checkpoints/StreetHazards_deeplabv3_resnet50.pth --arch deeplabv3_resnet50`
 * RoadAnomaly: `python eval.py road_anomaly checkpoints/BDD100k_deeplabv3plus_resnet101.pth --arch deeplabv3plus_resnet101`
-    

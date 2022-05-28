@@ -11,7 +11,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from data import StreetHazards, RoadAnomaly, transforms as tr
 from utils import aupr, fpr_at_tpr, AverageValueMeter
-from models.moose import deeplabv3_resnet50_moose, deeplabv3_resnet101_moose, deeplabv3plus_resnet101_moose
+from models.moose import *
 from utils.ood_score_functions import ood_score_functions
 
 
@@ -37,6 +37,12 @@ def main(args):
     elif args.arch == "deeplabv3_resnet101":
         model = deeplabv3_resnet101_moose(num_classes=test_data.num_classes,
                                           probes_depth=args.probes_depth).cuda()
+    elif args.arch == "pspnet_resnet50":
+        model = pspnet_resnet50_moose(num_classes=test_data.num_classes,
+                                      probes_depth=args.probes_depth).cuda()
+    elif args.arch == "pspnet_resnet101":
+        model = pspnet_resnet101_moose(num_classes=test_data.num_classes,
+                                      probes_depth=args.probes_depth).cuda()
     elif args.arch == "deeplabv3plus_resnet101":
         model = deeplabv3plus_resnet101_moose(num_classes=test_data.num_classes,
                                               output_stride=16,
@@ -106,6 +112,7 @@ def eval_ens_ood(model, loader):
         print("\n{:>10} {:>10} {:>10.02f}    {:>10.02f}".format(score_fn, "Global", metrics[score_fn]["AUPR"]["meter"].mean, metrics[score_fn]["FPR@95TPR"]["meter"].mean))
         print("{:>10} {:>10} {:>10.02f}    {:>10.02f}".format("", "MOoSe", metrics[score_fn]["AUPR"]["meter_moose"].mean, metrics[score_fn]["FPR@95TPR"]["meter_moose"].mean))
     print()
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
