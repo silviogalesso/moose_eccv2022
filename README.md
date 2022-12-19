@@ -1,4 +1,4 @@
-# Source code for ECCV2022 submission 3568
+# Code release for the paper "Probing Contextual Diversity for Dense Out-of-Distribution Detection"
 This repository contains evaluation code and pre-trained models.
 
 ## Setup
